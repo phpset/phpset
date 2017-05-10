@@ -26,5 +26,7 @@
       "App\\": "app/"
     }
   },
-  "classmap-authoritative": true
+  "config": {
+    "classmap-authoritative": true
+  }
 }

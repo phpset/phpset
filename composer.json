@@ -7,13 +7,14 @@
     "psr/log": "^1.0",
     "psr/cache": "^1.0",
     "psr/container": "^1.0",
+    "psr/http-message": "^1.0",
     "roave/security-advisories": "dev-master",
     "league/container": "*",
     "twig/twig": "*",
     "symfony/console": "*",
     "oscarotero/middleland": "0.4.0",
-    "phpset/fastroute-middleware": "dev-master",
-    "zendframework/zend-diactoros": "*"
+    "guzzlehttp/psr7": "*",
+    "phpset/fastroute-middleware": "dev-master"
   },
   "repositories": [
     {
@@ -27,6 +28,6 @@
     }
   },
   "config": {
-    "classmap-authoritative": true
+    "optimize-autoloader": true
   }
 }

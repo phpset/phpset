@@ -5,5 +5,5 @@ chdir(dirname(__DIR__));
 require_once 'vendor/autoload.php';
 
 $cli = new \Symfony\Component\Console\Application();
-$cli->addCommands(require_once 'app/commands.php');
+$cli->addCommands(require_once 'config/commands.php');
 $cli->run();

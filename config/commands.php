@@ -1,3 +1,3 @@
 <?php return [
-    new App\Commands\Example\Info('example:info'),
+    new \App\Example\InfoCommand('example:info'),
 ];

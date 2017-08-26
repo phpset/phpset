@@ -10,7 +10,9 @@
     "oscarotero/middleland": "0.4.0",
     "guzzlehttp/psr7": "*",
     "phpset/fastroute-middleware": "dev-master#e5dc0ff",
-    "phpset/injectable": "dev-master#4fd5409"
+    "phpset/pdomodel": "dev-master",
+    "phpset/injectable": "dev-master#4fd5409",
+    "robmorgan/phinx": "^0.8.1"
   },
   "autoload": {
     "psr-4": {

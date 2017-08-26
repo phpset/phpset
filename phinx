@@ -1,0 +1,15 @@
+#!/usr/bin/env php
+<?php
+/* @var \Symfony\Component\Console\Application $app */
+$app = require __DIR__ . '/vendor/robmorgan/phinx/app/phinx.php';
+
+$argv = $_SERVER['argv'];
+$configDir = '--configuration=config/phinx.php';
+$progName = array_shift($argv);
+if (count($argv)) {
+    $argv = array_merge([$progName, $configDir], $argv);
+} else {
+    $argv = null;
+}
+$input = new \Symfony\Component\Console\Input\ArgvInput($argv);
+$app->run($input);

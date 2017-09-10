@@ -2,5 +2,5 @@
 .idea
 app
 database
-config
+config/*
 !config/examples

@@ -3,3 +3,4 @@
 app
 database
 config
+!config/examples

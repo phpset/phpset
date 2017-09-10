@@ -11,8 +11,7 @@
     "league/container": "2.4.*",
     "symfony/console": "3.4.x-dev",
     "guzzlehttp/psr7": "1.4.*",
-    "robmorgan/phinx": "0.9.*",
-    "guzzlehttp/guzzle": "^6.3"
+    "robmorgan/phinx": "0.9.*"
   },
   "autoload": {
     "psr-4": {

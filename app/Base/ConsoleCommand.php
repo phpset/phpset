@@ -1,4 +1,5 @@
 <?php
+declare(strict_types = 1);
 
 
 namespace App\Base;
@@ -13,6 +14,8 @@ use Symfony\Component\Console\Output\OutputInterface;
  */
 abstract class ConsoleCommand extends \Symfony\Component\Console\Command\Command
 {
+    use Injectable;
+
     protected $input;
     protected $output;
 

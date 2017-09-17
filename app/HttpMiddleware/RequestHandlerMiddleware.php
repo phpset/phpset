@@ -15,7 +15,9 @@ class RequestHandlerMiddleware implements MiddlewareInterface
     public function process(ServerRequestInterface $request, DelegateInterface $delegate)
     {
         $handler = $request->getAttribute(self::HANDLER_ATTRIBUTE);
-        $result = call_user_func_array($handler, [$request]);
+        list($class, $method) = explode('::', $handler);
+        $class = new $class;
+        $result = call_user_func_array([$class, $method], [$request]);
         $body = json_encode($result);
         $status = 200;
         $headers = [];

@@ -10,6 +10,8 @@ use Psr\Http\Message\RequestInterface;
  */
 abstract class HttpController
 {
+    use Injectable;
+
     protected $request;
 
     protected function setRequest(RequestInterface $request)

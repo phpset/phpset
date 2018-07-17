@@ -4,7 +4,7 @@
   "require": {
     "php": "^7.1",
     "roave/security-advisories": "dev-master",
-    "phpset/fastroute-middleware": "dev-master#7288692",
+    "phpset/fastroute-middleware": "dev-master#775a8e1",
     "phpset/pdomodel": "dev-master#74d8c3b",
     "phpset/injectable": "dev-master#691312f",
     "oscarotero/middleland": "0.4.*",

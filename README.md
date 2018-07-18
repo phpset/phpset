@@ -7,8 +7,8 @@ composer create-project --prefer-dist --stability=dev phpset/phpset projectname
 composer install --no-dev
 
 
-php -S localhost:8000 -t public_api
-# open in browser http://localhost:8000
+# run php server + open in browser
+open http://localhost:8000 && php -S localhost:8000 -t public_api 
 ```
 
 

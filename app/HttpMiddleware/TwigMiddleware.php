@@ -24,6 +24,11 @@ class TwigMiddleware implements MiddlewareInterface
         }
 
         $template = $request->getAttribute(self::TEMPLATE_ATTRIBUTE);
+        $templateFile = APP_DIR . 'templates/' . $template;
+
+        if (!$template || $template == '' || !file_exists($templateFile)) {
+            return $response;
+        }
 
         $loader = new \Twig_Loader_Filesystem(APP_DIR . 'templates');
         $twig = new \Twig_Environment($loader);

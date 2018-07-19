@@ -42,8 +42,8 @@ class RouterMiddleware implements MiddlewareInterface
 
         // Found below
         $routeData = $routeInfo[1];
-        $handlerClass = $routeData[2];
-        $template = $routeData[3];
+        $handlerClass = $routeData[2] . '::' . $routeData[3];
+        $template = $routeData[4];
 
 
         // Add GET params to Request attributes

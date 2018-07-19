@@ -16,7 +16,11 @@ $routes = file_exists($configsPath . 'routes.php') ? include $configsPath . 'rou
 $middleware = file_exists($configsPath . 'middleware.php') ? include $configsPath . 'middleware.php' : [];
 $middleware = array_merge($middleware, [
     // Router
-    new \FastRouteMiddleware\Router($routes, '\App\Controllers\NotFoundController::showMessage'),
+    new \App\HttpMiddleware\RouterMiddleware($routes, '\App\Controllers\NotFoundController::showMessage'),
+
+    // Html Template
+    new \App\HttpMiddleware\TwigMiddleware(),
+
     // calling Controller
     new \App\HttpMiddleware\RequestHandlerMiddleware(),
 ]);

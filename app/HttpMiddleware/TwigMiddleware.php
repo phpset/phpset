@@ -14,9 +14,17 @@ class TwigMiddleware implements MiddlewareInterface
         /* @var \Psr\Http\Message\ResponseInterface $response */
         $response = $delegate->process($request);
 
-        $stream = \GuzzleHttp\Psr7\stream_for('<h1>aaaa!</h1>');
-        $response = $response->withBody($stream);
+        $data = $response->getBody()->__toString();
+        $data = json_decode($data, true);
 
+
+        $loader = new \Twig_Loader_Filesystem(APP_DIR . 'templates');
+        $twig = new \Twig_Environment($loader);
+        $html = $twig->render('hello.html', $data);
+
+        
+        $stream = \GuzzleHttp\Psr7\stream_for($html);
+        $response = $response->withBody($stream);
         return $response;
     }
 }

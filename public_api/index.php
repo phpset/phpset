@@ -1,15 +1,26 @@
 <?php
 define('APP_START_TIME', microtime(true));
-require __DIR__ . '/../vendor/autoload.php';
+define('APP_DIR', __DIR__ . '/../');
+require APP_DIR . 'vendor/autoload.php';
+
+$configsPath = APP_DIR . 'config/';
 
 // Set up Container
-$env = require __DIR__ . '/../config/env.php';
-$services = require __DIR__ . '/../config/services.php';
+$env = file_exists($configsPath . 'env.php') ? include $configsPath . 'env.php' : [];
+$services = file_exists($configsPath . 'services.php') ? include $configsPath . 'services.php' : [];
 $container = \Injectable\Factories\LeagueFactory::fromConfig($services, [$env]);
 \Injectable\ContainerSingleton::setContainer($container);
 
 // Dispatch Request
-$middleware = require __DIR__ . '/../config/middleware.php';
+$routes = file_exists($configsPath . 'routes.php') ? include $configsPath . 'routes.php' : [];
+$middleware = file_exists($configsPath . 'middleware.php') ? include $configsPath . 'middleware.php' : [];
+$middleware = array_merge($middleware, [
+    // Router
+    new \FastRouteMiddleware\Router($routes, '\App\Controllers\NotFoundController::showMessage'),
+    // calling Controller
+    new \App\HttpMiddleware\RequestHandlerMiddleware(),
+]);
+
 $request = \GuzzleHttp\Psr7\ServerRequest::fromGlobals();
 $dispatcher = new \Middleland\Dispatcher($middleware);
 ob_start(); // catch any error and other text

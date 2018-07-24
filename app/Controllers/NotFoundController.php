@@ -10,5 +10,6 @@ class NotFoundController extends HttpController
 {
     public function showMessage()
     {
+        $this->response = $this->response->withStatus(404);
     }
 }

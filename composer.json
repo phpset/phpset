@@ -3,14 +3,14 @@
   "description": "Flexible Set of fast PHP packages. Instead Framework.",
   "require": {
     "php": "^7.1.3",
-    "roave/security-advisories": "dev-master#053766d",
+    "roave/security-advisories": "dev-master#2149b00",
     "phpset/pdomodel": "dev-master#74d8c3b",
     "phpset/injectable": "dev-master#691312f",
     "oscarotero/middleland": "1.0",
-    "symfony/console": "^4.1",
+    "symfony/console": "^4.2",
     "guzzlehttp/psr7": "1.4.*",
     "robmorgan/phinx": "0.9.*",
-    "twig/twig": "^2.0",
+    "twig/twig": "^2.9",
     "nikic/fast-route": "^1.3"
   },
   "autoload": {

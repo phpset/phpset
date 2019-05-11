@@ -8,28 +8,41 @@ $configsPath = APP_DIR . 'config/';
 // Set up Container
 $env = file_exists($configsPath . 'env.php') ? include $configsPath . 'env.php' : [];
 $services = file_exists($configsPath . 'services.php') ? include $configsPath . 'services.php' : [];
-$container = \Injectable\Factories\LeagueFactory::fromConfig($services, [$env]);
-\Injectable\ContainerSingleton::setContainer($container);
+$container = new \League\Container\Container();
+$container->delegate(new League\Container\ReflectionContainer); // Enable auto wiring
+foreach ($services as $name => $concrete) {
+    $container->add($name, $concrete, true);
+}
 
-// Dispatch Request
-$routes = file_exists($configsPath . 'routes.php') ? include $configsPath . 'routes.php' : [];
-$middleware = file_exists($configsPath . 'middleware.php') ? include $configsPath . 'middleware.php' : [];
-$middleware = array_merge($middleware, [
-    // Router
-    new \App\HttpMiddleware\RouterMiddleware($routes, '\App\Controllers\NotFoundController::showMessage'),
 
-    // Html Template
-    new \App\HttpMiddleware\TwigMiddleware(),
+// Building Router and HTTP middleware
+$router = new League\Route\Router();
+$routesConfig = file_exists($configsPath . 'routes.php') ? include $configsPath . 'routes.php' : [];
+foreach ($routesConfig as $record) {
+    $httpMethod = strtoupper($record[0]);
+    $path = $record[1];
+    $controller = $record[2];
+    $method = $record[3];
+    $router->map($httpMethod, $path, [$controller, $method]);
+}
 
-    // calling Controller
-    new \App\HttpMiddleware\RequestHandlerMiddleware(),
-]);
+$middlewareConfig = file_exists($configsPath . 'middleware.php') ? include $configsPath . 'middleware.php' : [];
+foreach ($middlewareConfig as $record) {
+    $router->middleware($record);
+}
 
+// Make JSON response (for API)
+$responseFactory = new \Http\Factory\Guzzle\ResponseFactory();
+$strategy = new League\Route\Strategy\JsonStrategy($responseFactory);
+$strategy->setContainer($container);
+$router->setStrategy($strategy);
+
+// Processing request
 $request = \GuzzleHttp\Psr7\ServerRequest::fromGlobals();
-$dispatcher = new \Middleland\Dispatcher($middleware);
 ob_start(); // catch any error and other text
-$response = $dispatcher->dispatch($request);
+$response = $router->dispatch($request);
 $log = ob_get_clean();
+
 
 // Sending response
 $statusCode = $response->getStatusCode();

@@ -5,13 +5,14 @@
     "php": "^7.1.3",
     "roave/security-advisories": "dev-master#2149b00",
     "phpset/pdomodel": "dev-master#74d8c3b",
-    "phpset/injectable": "dev-master#691312f",
-    "oscarotero/middleland": "1.0",
+    "robmorgan/phinx": "0.9.*",
     "symfony/console": "^4.2",
     "guzzlehttp/psr7": "1.4.*",
-    "robmorgan/phinx": "0.9.*",
     "twig/twig": "^2.9",
-    "nikic/fast-route": "^1.3"
+    "league/route": "^4.2",
+    "http-interop/http-factory-guzzle": "1.0.0",
+    "psr/http-server-middleware": "^1.0",
+    "league/container": "^3.2"
   },
   "autoload": {
     "psr-4": {

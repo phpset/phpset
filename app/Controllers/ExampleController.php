@@ -3,12 +3,12 @@
 
 namespace App\Controllers;
 
+use Psr\Http\Message\ServerRequestInterface;
 
-use App\Base\HttpController;
-
-class ExampleController extends HttpController
+class ExampleController
 {
-    public function index()
+    public function index(ServerRequestInterface $request): array
     {
+        return ['works'];
     }
 }
